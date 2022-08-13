@@ -15,6 +15,9 @@ dbConnection();
 //CORS
 app.use(cors())
 
+// Directorio Público
+app.use(express.static('public'));
+
 
 // Lectura y parseo del Body
 app.use( express.json() );
@@ -23,10 +26,11 @@ app.use( express.json() );
 app.use('/api/auth', require('./routes/auth') );
 app.use('/api/events', require('./routes/events') );
 
+app.get('*', (req, res) => {
+        res.sendFile( __dirname + '/public/index.html');
+})
 
 
-// Directorio Público
-app.use(express.static('public'));
 
 
 // Escuchar peticiones
